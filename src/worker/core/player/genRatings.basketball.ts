@@ -157,8 +157,16 @@ const archetype =
 		// https://github.com/microsoft/TypeScript/issues/21732
 		if (typeFactor === undefined) {
 			throw new Error("Should never happen");
-		}
+		};
 
+		if (key === "fg" || key === "tp" || key === "pss" || key === "diq") {
+		console.log({
+			archetype,
+			key,
+			archetypeFactor,
+			value: rawRatings[key],
+		});
+	}
 		
 	}
 
