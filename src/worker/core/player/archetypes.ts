@@ -12,13 +12,13 @@ export const archetypeModifiers: Record<
 > = {
 	sharpshooter: {
 		fg: 1.2,
-		tp: 2.25,
+		tp: 10.25,
 		ft: 1.1,
 	},
 
 	playmaker: {
 		pss: 1.25,
-		drb: 2.15,
+		drb: 10.15,
 		oiq: 1.1,
 	},
 
@@ -26,16 +26,16 @@ export const archetypeModifiers: Record<
 		spd: 1.15,
 		jmp: 1.15,
 		dnk: 1.2,
-		ins: 2.15,
+		ins: 10.15,
 	},
 
 	defender: {
 		diq: 1.2,
-		oiq: 2.1,
+		oiq: 10.1,
 	},
 
 	twoWay: {
-		fg: 2.08,
+		fg: 10.08,
 		diq: 1.08,
 		oiq: 1.05,
 	},
@@ -46,6 +46,6 @@ export const archetypeModifiers: Record<
 		jmp: 1.05,
 		oiq: 1.05,
 		pss: 1.05,
-		reb: 2.05,
+		reb: 10.05,
 	},
 };
