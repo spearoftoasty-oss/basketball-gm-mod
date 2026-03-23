@@ -6,6 +6,8 @@ import type {
 	PlayerRatings,
 	RatingKey,
 } from "../../../common/types.basketball.ts";
+import { archetypeModifiers } from "./archetypes.ts";
+import type { Archetype } from "./archetypes.ts";
 
 const typeFactors: Record<
 	"point" | "wing" | "big",
@@ -110,12 +112,25 @@ const genRatings = (
 		reb: 40,
 	};
 
+	const archetypes = [
+	"sharpshooter",
+	"playmaker",
+	"slasher",
+	"defender",
+	"twoWay",
+	"allRounder",
+];
+
+const archetype =
+	archetypes[Math.floor(Math.random() * archetypes.length)];
+
 	// For correlation across ratings, to ensure some awesome players, but athleticism and skill are independent to
 	// ensure there are some who are elite in one but not the other
 	const factorAthleticism = helpers.bound(random.realGauss(1, 0.3), 0.2, 1.2);
 	const factorShooting = helpers.bound(random.realGauss(1, 0.3), 0.2, 1.2);
 	const factorSkill = helpers.bound(random.realGauss(1, 0.3), 0.2, 1.2);
 	const factorIns = helpers.bound(random.realGauss(1, 0.3), 0.2, 1.2);
+	const archMods = archetypeModifiers[archetype];
 
 	for (const key of helpers.keys(rawRatings)) {
 		const typeFactor = typeFactors[type][key] ?? 1;
@@ -129,15 +144,22 @@ const genRatings = (
 			factor = factorSkill;
 		}
 
+		const archetypeFactor = archMods[key] ?? 1;
+
+		rawRatings[key] = limitRating(
+			factor *
+			typeFactor *
+			archetypeFactor * // 👈 applied here
+			random.realGauss(rawRatings[key], 6)
+		);
+
 		// For TypeScript
 		// https://github.com/microsoft/TypeScript/issues/21732
 		if (typeFactor === undefined) {
 			throw new Error("Should never happen");
 		}
 
-		rawRatings[key] = limitRating(
-			factor * typeFactor * random.realGauss(rawRatings[key], 6),
-		);
+		
 	}
 
 	const ratings = {
