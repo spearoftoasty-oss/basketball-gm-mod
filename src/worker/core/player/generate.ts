@@ -8,6 +8,7 @@ import type {
 } from "../../../common/types.ts";
 import genWeight from "./genWeight.ts";
 import genMoodTraits from "./genMoodTraits.ts";
+console.log("🔥🔥🔥 genRatings IS RUNNING 🔥🔥🔥");
 
 const generate = (
 	tid: number,
